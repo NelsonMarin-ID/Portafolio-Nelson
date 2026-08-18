@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-ivory: #F5F5F0;
+  --color-ink: #141414;
+  --color-wine: #5A5A40; 
+}
+
+@layer base {
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  ::selection {
+    background-color: var(--color-wine);
+    color: var(--color-ivory);
+  }
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px var(--color-ink);
+  color: transparent;
+}
+.text-stroke-wine {
+  -webkit-text-stroke: 1px var(--color-wine);
+  color: transparent;
+}
