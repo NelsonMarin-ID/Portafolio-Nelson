@@ -81,7 +81,7 @@ export function Navbar() {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
       <div
-        className="max-w-[1600px] mx-auto flex items-center justify-between gap-6 rounded-full px-5 sm:px-8 py-3 sm:py-4 bg-white"
+        className="max-w-[1600px] mx-auto flex items-center justify-between gap-6 rounded-full px-8 sm:px-12 py-3 sm:py-4 bg-white"
         style={{ boxShadow: "0 8px 30px rgba(0,30,50,0.10)" }}
       >
         {/* Logo */}
