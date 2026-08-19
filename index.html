@@ -13,28 +13,62 @@
       rel="stylesheet"
     />
 
-    <!--
-      NECO (títulos) es una fuente comercial: no está disponible en Google Fonts.
-      Coloca los archivos que hayas licenciado en /public/fonts/neco/
-      y ajusta los pesos/nombres de archivo según lo que tengas (Regular, Bold, Black, etc).
-    -->
+    <!-- NECO (títulos) -->
     <style>
       @font-face {
         font-family: "NECO";
-        src:
-          url("/fonts/neco/Neco-Bold.woff2") format("woff2"),
-          url("/fonts/neco/Neco-Bold.woff") format("woff");
+        src: url("/fonts/neco/Neco-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "NECO";
+        src: url("/fonts/neco/Neco-Italic.woff2") format("woff2");
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "NECO";
+        src: url("/fonts/neco/Neco-Medium.woff2") format("woff2");
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "NECO";
+        src: url("/fonts/neco/Neco-MediumItalic.woff2") format("woff2");
+        font-weight: 500;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "NECO";
+        src: url("/fonts/neco/Neco-Bold.woff2") format("woff2");
         font-weight: 700;
         font-style: normal;
         font-display: swap;
       }
       @font-face {
         font-family: "NECO";
-        src:
-          url("/fonts/neco/Neco-Black.woff2") format("woff2"),
-          url("/fonts/neco/Neco-Black.woff") format("woff");
+        src: url("/fonts/neco/Neco-BoldItalic.woff2") format("woff2");
+        font-weight: 700;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "NECO";
+        src: url("/fonts/neco/Neco-Black.woff2") format("woff2");
         font-weight: 900;
         font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "NECO";
+        src: url("/fonts/neco/Neco-BlackItalic.woff2") format("woff2");
+        font-weight: 900;
+        font-style: italic;
         font-display: swap;
       }
 
