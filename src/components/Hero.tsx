@@ -22,7 +22,7 @@ export function Hero() {
       {/* Contenido central */}
       <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12 text-center flex flex-col items-center gap-10">
         <motion.h1
-          className="font-display font-extrabold text-white text-[38px] sm:text-[56px] md:text-[72px] leading-[1.08] tracking-tight"
+          className="font-display font-extrabold text-white text-[38px] sm:text-[56px] md:text-[68px] leading-[1.08] tracking-tight"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
