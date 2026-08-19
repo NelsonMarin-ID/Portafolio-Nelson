@@ -1,71 +1,114 @@
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+
+const SIDE_NAV = [
+  { label: "Proyectos", href: "#proyectos" },
+  { label: "Filosofía", href: "#filosofia" },
+  { label: "Metodología", href: "#metodologia" },
+  { label: "Clientes", href: "#clientes" },
+  { label: "Contactos", href: "#contacto" },
+];
 
 export function Hero() {
+  const [activeHref, setActiveHref] = useState(SIDE_NAV[0].href);
+
+  useEffect(() => {
+    const sections = SIDE_NAV
+      .map((item) => document.querySelector(item.href))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveHref(`#${entry.target.id}`);
+          }
+        });
+      },
+      {
+        // Dispara cuando la sección cruza la franja central de la pantalla
+        rootMargin: "-45% 0px -45% 0px",
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="relative min-h-[95vh] w-full flex flex-col justify-end pb-12 sm:pb-24 px-6 md:px-12 pt-32 overflow-hidden">
-      {/* Decorative floating elements */}
-      <motion.div 
-        className="absolute top-[20%] right-[10%] w-64 h-64 md:w-96 md:h-96 bg-wine/5 rounded-full blur-3xl"
-        animate={{ 
-          scale: [1, 1.2, 1],
-          opacity: [0.5, 0.8, 0.5],
+    <section className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden bg-[#0a1622]">
+      {/* Fondo con degradado + textura granulada */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(120% 90% at 15% 0%, #16324a 0%, #0d1f30 45%, #060e17 100%)",
         }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
       />
+      <svg className="absolute inset-0 w-full h-full opacity-[0.05] mix-blend-overlay pointer-events-none">
+        <filter id="grain">
+          <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#grain)" />
+      </svg>
 
-      <div className="z-10 w-full max-w-7xl mx-auto flex flex-col gap-8 md:gap-16">
-        <motion.h1 
-          className="text-[38px] sm:text-[52px] md:text-[110px] leading-[0.95] md:leading-[0.85] font-extrabold tracking-tight uppercase mb-6 font-display"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        >
-          Marcas <br className="hidden md:block" />
-          que se sienten
-          <span className="block">inevitables.</span>
-        </motion.h1>
-
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-8 md:gap-12 w-full">
-          <motion.div 
-            className="md:w-1/2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.8 }}
-          >
-            <p className="font-sans text-sm leading-relaxed text-ink/70">
-              No hago solo logos. Construyo sistemas visuales y estrategias de marca para negocios con postura, proyectos culturales e ideas que se niegan a pasar desapercibidas. Branding con dirección, no decoración.
-            </p>
-          </motion.div>
-
-          <motion.button 
-            className="bg-wine text-ivory font-sans text-[10px] tracking-[0.2em] uppercase py-4 px-8 rounded-full hover:bg-ink transition-colors flex items-center gap-4 w-fit"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1 }}
-          >
-            <span>
-              Iniciar Proyecto
-            </span>
-            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-          </motion.button>
+      {/* Navegación lateral de puntos — solo desktop (lg y superior) */}
+      <div className="hidden lg:flex absolute left-12 top-1/2 -translate-y-1/2 flex-col gap-8 z-10">
+        <div className="relative flex flex-col gap-8">
+          <span className="absolute left-[5px] top-2 bottom-2 w-px bg-white/25" aria-hidden="true" />
+          {SIDE_NAV.map((item) => {
+            const isActive = activeHref === item.href;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                className="group flex items-center gap-3 font-sans text-sm text-white/80 hover:text-white transition-colors"
+              >
+                <motion.span
+                  className="relative z-10 h-[11px] w-[11px] rounded-full border bg-[#0a1622]"
+                  animate={{
+                    backgroundColor: isActive ? "#ffffff" : "#0a1622",
+                    borderColor: isActive ? "#ffffff" : "rgba(255,255,255,0.5)",
+                    scale: isActive ? 1.15 : 1,
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+                <span className={isActive ? "text-white" : ""}>{item.label}</span>
+              </a>
+            );
+          })}
         </div>
       </div>
 
-      {/* Hero Image Mockup (Abstract representation) */}
-      <motion.div 
-        className="absolute right-0 bottom-0 md:right-12 md:bottom-24 w-1/3 md:w-1/4 aspect-[3/4] bg-neutral-300 hidden md:block overflow-hidden rounded-sm"
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <img 
-          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" 
-          alt="Abstract art direction"
-          className="w-full h-full object-cover scale-110"
-        />
-        <div className="absolute inset-0 bg-ink/10 mix-blend-multiply"></div>
-      </motion.div>
+      {/* Contenido central */}
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-12 text-center flex flex-col items-center gap-10">
+        <motion.h1
+          className="font-display italic font-bold text-white text-[34px] sm:text-[48px] md:text-[64px] leading-[1.08] tracking-tight"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        >
+          Branding Estratégico
+          <br />
+          para empresas que quieren
+          <br />
+          dejar de competir por precio.
+        </motion.h1>
+
+        <motion.a
+          href="#contacto"
+          className="inline-flex items-center bg-[#e8ff3c] text-[#0a1622] font-sans font-extrabold text-sm tracking-wide uppercase py-4 px-8 rounded-full hover:bg-white transition-colors"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          Iniciar Proyecto
+        </motion.a>
+      </div>
     </section>
   );
 }
