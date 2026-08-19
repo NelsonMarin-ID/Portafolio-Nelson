@@ -4,10 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Google AI Studio App</title>
+
+    <!-- Bricolage Grotesque (texto general / botones) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--
+      NECO (títulos) es una fuente comercial: no está disponible en Google Fonts.
+      Coloca los archivos que hayas licenciado en /public/fonts/neco/
+      y ajusta los pesos/nombres de archivo según lo que tengas (Regular, Bold, Black, etc).
+    -->
+    <style>
+      @font-face {
+        font-family: "NECO";
+        src:
+          url("/fonts/neco/Neco-Bold.woff2") format("woff2"),
+          url("/fonts/neco/Neco-Bold.woff") format("woff");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: "NECO";
+        src:
+          url("/fonts/neco/Neco-Black.woff2") format("woff2"),
+          url("/fonts/neco/Neco-Black.woff") format("woff");
+        font-weight: 900;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      :root {
+        --font-display: "NECO", Georgia, "Times New Roman", serif;
+        --font-sans: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
+      }
+
+      .font-display {
+        font-family: var(--font-display);
+      }
+      .font-sans {
+        font-family: var(--font-sans);
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
