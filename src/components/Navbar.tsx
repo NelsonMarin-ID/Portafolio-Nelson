@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
@@ -73,31 +73,16 @@ export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState(NAV_LINKS[0].href);
 
-  // Transparencia progresiva del header al hacer scroll
-  const { scrollY } = useScroll();
-  const headerOpacity = useTransform(scrollY, [0, 160], [1, 0.55]);
-  const headerBlur = useTransform(scrollY, [0, 160], [0, 12]);
-  const headerShadow = useTransform(
-    scrollY,
-    [0, 160],
-    ["0 1px 0 rgba(0,30,50,0)", "0 8px 30px rgba(0,30,50,0.12)"]
-  );
-
   return (
     <motion.header
-      className="fixed top-4 sm:top-6 inset-x-4 sm:inset-x-6 z-50"
+      className="fixed top-4 sm:top-6 inset-x-2 sm:inset-x-4 z-50"
       initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
-      <motion.div
-        className="max-w-7xl mx-auto flex items-center justify-between gap-6 rounded-full px-5 sm:px-8 py-3 sm:py-4 bg-white"
-        style={{
-          opacity: headerOpacity,
-          backdropFilter: useTransform(headerBlur, (v) => `blur(${v}px)`),
-          WebkitBackdropFilter: useTransform(headerBlur, (v) => `blur(${v}px)`),
-          boxShadow: headerShadow,
-        }}
+      <div
+        className="max-w-[1600px] mx-auto flex items-center justify-between gap-6 rounded-full px-5 sm:px-8 py-3 sm:py-4 bg-white"
+        style={{ boxShadow: "0 8px 30px rgba(0,30,50,0.10)" }}
       >
         {/* Logo */}
         <a href="#top" className="text-[#001e32] shrink-0" aria-label="Inicio">
@@ -142,7 +127,7 @@ export function Navbar() {
         >
           {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
-      </motion.div>
+      </div>
 
       {/* Mobile menu */}
       {isMenuOpen && (
